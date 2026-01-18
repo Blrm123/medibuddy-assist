@@ -2,7 +2,7 @@
 
 import { VerificationStatus } from "@/lib/generated/prisma/enums";
 import { db } from "@/lib/prisma";
-import type { User } from "@/lib/generated/prisma/client";
+import type { User } from "@prisma/client";
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 
