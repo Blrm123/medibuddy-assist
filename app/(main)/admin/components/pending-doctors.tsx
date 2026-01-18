@@ -1,5 +1,3 @@
-
-
 "use client";
 
 import { useState } from "react";
@@ -26,16 +24,16 @@ import { format } from "date-fns";
 import { updateDoctorStatus } from "@/actions/admin";
 import { useFetch } from "@/hooks/use-fetch";
 import BarLoader from "react-spinners/BarLoader";
-import type { User as PrismaUser } from "@/lib/generated/prisma/client";
+import type { User } from "@prisma/client";
 
-export function PendingDoctors({ doctors }: { doctors: PrismaUser[] }) {
-  const [selectedDoctor, setSelectedDoctor] = useState<PrismaUser | null>(null);
+export function PendingDoctors({ doctors }: { doctors: User[] }) {
+  const [selectedDoctor, setSelectedDoctor] = useState<User | null>(null);
 
   // Custom hook for approve/reject server action
   const { loading, fn: submitStatusUpdate } = useFetch(updateDoctorStatus);
 
   // Open doctor details dialog
-  const handleViewDetails = (doctor: PrismaUser) => {
+  const handleViewDetails = (doctor: User) => {
     setSelectedDoctor(doctor);
   };
 

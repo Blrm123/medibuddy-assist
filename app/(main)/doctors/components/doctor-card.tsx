@@ -4,10 +4,10 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 import Image from "next/image";
-import type { User as PrismaUser } from "@/lib/generated/prisma/client";
+import type { User } from "@prisma/client";
 
 
-export function DoctorCard({ doctor }: { doctor: PrismaUser }) {
+export function DoctorCard({ doctor }: { doctor: User }) {
   return (
     <Card className="border-emerald-900/20 hover:border-emerald-700/40 transition-all">
       <CardContent>
