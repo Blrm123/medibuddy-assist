@@ -11,7 +11,7 @@ interface DoctorProfileLayoutParams {
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<DoctorProfileLayoutParams>;
+  params: Promise<{ speciality: string; id: string }>;
 }) {
   const { id } = await params;
 
@@ -27,7 +27,7 @@ export default async function DoctorProfileLayout({
   params,
 }: {
   children: ReactNode;
-  params: Promise<DoctorProfileLayoutParams>;
+  params: Promise<{ speciality: string; id: string }>;
 }) {
   const { id } = await params;
   const { doctor } = await getDoctorById(id);
