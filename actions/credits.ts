@@ -4,7 +4,7 @@ import { db } from "@/lib/prisma";
 import { revalidatePath } from "next/cache";
 import { format } from "date-fns";
 import { auth } from "@clerk/nextjs/server";
-import type { User, CreditTransaction } from "@/lib/generated/prisma/client";
+import type { User, CreditTransaction } from "@prisma/client";
 
 export type UserWithTransactions = User & {
   transactions: CreditTransaction[];
