@@ -3,31 +3,34 @@ import { redirect } from "next/navigation";
 import { PageHeader } from "@/components/page-header";
 import type { ReactNode } from "react";
 
-interface DoctorProfileLayoutParams {
+type DoctorParams = {
   speciality: string;
   id: string;
-}
+};
 
+/* ✅ generateMetadata MUST use sync params */
 export async function generateMetadata({
   params,
 }: {
-  params: Promise<{ speciality: string; id: string }>;
+  params: DoctorParams;
 }) {
-  const { id } = await params;
+  const { id } = params;
 
   const { doctor } = await getDoctorById(id);
+
   return {
     title: `Dr. ${doctor.name} - MediBuddy`,
     description: `Book an appointment with Dr. ${doctor.name}, ${doctor.specialty} specialist with ${doctor.experience} years of experience.`,
   };
 }
 
+/* ✅ layout params IS async */
 export default async function DoctorProfileLayout({
   children,
   params,
 }: {
   children: ReactNode;
-  params: Promise<{ speciality: string; id: string }>;
+  params: Promise<DoctorParams>;
 }) {
   const { id } = await params;
   const { doctor } = await getDoctorById(id);
@@ -37,8 +40,7 @@ export default async function DoctorProfileLayout({
   return (
     <div className="container mx-auto">
       <PageHeader
-        // icon={<Stethoscope />}
-        title={"Dr. " + doctor.name}
+        title={`Dr. ${doctor.name}`}
         backLink={`/doctors/${doctor.specialty}`}
         backLabel={`Back to ${doctor.specialty}`}
       />
