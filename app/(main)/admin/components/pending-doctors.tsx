@@ -9,7 +9,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Check, X, User, Medal, FileText, ExternalLink } from "lucide-react";
+import { Check, X, User as UserIcon, Medal, FileText, ExternalLink } from "lucide-react";
 import { Separator } from "@/components/ui/separator";
 import {
   Dialog,
@@ -86,7 +86,7 @@ export function PendingDoctors({ doctors }: { doctors: User[] }) {
                     <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                       <div className="flex items-center gap-3">
                         <div className="bg-muted/20 rounded-full p-2">
-                          <User className="h-5 w-5 text-emerald-400" />
+                          <UserIcon className="h-5 w-5 text-emerald-400" />
                         </div>
                         <div>
                           <h3 className="font-medium text-white">{doctor.name ?? "Unnamed"}</h3>
