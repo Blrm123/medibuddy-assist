@@ -1,6 +1,10 @@
 
+'use client';
+
 import Link from 'next/link'
 import Image from 'next/image'
+import { useAuth } from '@clerk/nextjs';
+import { useRouter } from 'next/navigation';
 
 const links = [
     {
@@ -26,6 +30,14 @@ const links = [
 ]
 
 export default function FooterSection() {
+    const { isSignedIn } = useAuth();
+    const router = useRouter();
+
+    const handleLinkClick = (href: string) => {
+        if (href === '/doctors' && !isSignedIn) {
+            router.push('/sign-in');
+        }
+    };
     return (
         <footer className="py-10 md:py-20 bg-muted/30">
             <div className="mx-auto max-w-5xl ">
@@ -46,7 +58,13 @@ export default function FooterSection() {
                     {links.map((link, index) => (
                         <Link
                             key={index}
-                            href={link.href}
+                            href={link.href === '/doctors' && !isSignedIn ? '#' : link.href}
+                            onClick={(e) => {
+                                if (link.href === '/doctors' && !isSignedIn) {
+                                    e.preventDefault();
+                                    router.push('/sign-in');
+                                }
+                            }}
                             className="text-muted-foreground hover:text-primary block duration-150">
                             <span>{link.title}</span>
                         </Link>

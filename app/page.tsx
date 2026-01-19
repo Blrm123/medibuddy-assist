@@ -1,3 +1,5 @@
+"use client";
+
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import {Stethoscope} from "lucide-react";
@@ -8,8 +10,28 @@ import { creditBenefits, features, testimonials } from "@/lib/data";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Pricing from "@/components/pricing";
 import FooterSection from "@/components/footer";
+import { useAuth } from "@clerk/nextjs";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
+  const { isSignedIn } = useAuth();
+  const router = useRouter();
+
+  const handleGetStarted = () => {
+    if (!isSignedIn) {
+      router.push("/sign-in");
+    } else {
+      router.push("/onboarding");
+    }
+  };
+
+  const handleFindDoctors = () => {
+    if (!isSignedIn) {
+      router.push("/sign-in");
+    } else {
+      router.push("/doctors");
+    }
+  };
   return (
     <div className="min-h-screen">
       <div className="bg-background"> 
@@ -32,21 +54,19 @@ export default function Home() {
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4">
                   <Button
-                    asChild
+                    onClick={handleGetStarted}
                     size="lg"
                     className="bg-emerald-600 text-white hover:bg-emerald-700"
                   >
-                    <Link href="/onboarding">
-                      Get Started <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
+                    Get Started <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>
                   <Button
-                    asChild
+                    onClick={handleFindDoctors}
                     variant="outline"
                     size="lg"
                     className="border-emerald-700/30 hover:bg-muted/80"
                   >
-                    <Link href="/doctors">Find Doctors</Link>
+                    Find Doctors
                   </Button>
                 </div>
               </div>
