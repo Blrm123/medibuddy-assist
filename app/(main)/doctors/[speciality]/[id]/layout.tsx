@@ -8,13 +8,13 @@ type DoctorParams = {
   id: string;
 };
 
-/* ✅ generateMetadata MUST use sync params */
+/* ✅ generateMetadata MUST use async params */
 export async function generateMetadata({
   params,
 }: {
-  params: DoctorParams;
+  params: Promise<DoctorParams>;
 }) {
-  const { id } = params;
+  const { id } = await params;
 
   const { doctor } = await getDoctorById(id);
 

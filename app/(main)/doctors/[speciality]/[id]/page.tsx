@@ -10,9 +10,9 @@ interface DoctorProfilePageParams {
 export default async function DoctorProfilePage({
   params,
 }: {
-  params: DoctorProfilePageParams;
+  params: Promise<DoctorProfilePageParams>;
 }) {
-  const { id } = params;
+  const { id } = await params;
   let doctorData;
   let slotsData;
 
